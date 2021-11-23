@@ -1,0 +1,7 @@
+Maximize
+x+2y=z
+Subject to:
+2x+y <=20
+4x-5y >= -10
+-x +2y >=-2
+-x+5y=15
