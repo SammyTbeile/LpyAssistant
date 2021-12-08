@@ -1,8 +1,16 @@
-### LPyAssistant
+## LPyAssistant
 
 A simple python LP solver
 
-## Usage:
+### Usage:
+LPyAssistant can either be run on a local file or as a Flask app:
+
+### Flask app
+Run using:
+```
+FLASK_APP=lpyassistant poetry run flask run
+```
+### Local File
 Create a file containing your LP in the followin format:
 ```
 Minimize/Maximize

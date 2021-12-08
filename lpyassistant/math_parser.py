@@ -5,7 +5,7 @@ import operator
 def parse_expression(expression: str, model_vars: dict, constraint: bool=True):
     expr = LpAffineExpression() if not constraint else LpConstraint()
     # Get list of vars
-    var_regex = re.compile(r'[a-zA-Z]')
+    var_regex = re.compile(r'[a-zA-Z]_?\d?')
     var_regex_list = var_regex.findall(expression)
     var_list = list(map(lambda x: LpVariable(name=x,lowBound=0),var_regex_list))
     # For each var, find constants

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>LPyAssistant</title>
+  </head>
+  <body>
+    {% block content %}
+
+    <div class="form-wrapper">
+        <h2 class="title">LPyAssistant</h2>
+        <form method="POST" action="/">
+          <fieldset class="form-field">
+            {{ form.minimize.label }}
+            {{ form.minimize }}
+            {% if form.minimize.errors %}
+              <ul class="errors">
+                {% for error in form.minimize.errors %}
+                <li>{{error}}</li>
+                {% endfor %}
+              <ul>
+            {% endif %}
+          </fieldset>
+          <fieldset class="form-field">
+            {{ form.objective.label }}
+            {{ form.objective }}
+            {% if form.objective.errors %}
+              <ul class="errors">
+                {% for error in form.objective.errors %}
+                <li>{{error}}</li>
+                {% endfor %}
+              <ul>
+            {% endif %}
+          </fieldset>
+          <fieldset class="form-field">
+            {{ form.constraints.label }}
+            {{ form.constraints }}
+            {% if form.constraints.errors %}
+              <ul class="errors">
+                {% for error in form.constraints.errors %}
+                <li>{{error}}</li>
+                {% endfor %}
+              <ul>
+            {% endif %}
+          </fieldset>
+
+          {{form.csrf_token}}
+          {{form.submit}}
+
+    {% endblock %}
+  </body>
+</html>
