@@ -5,12 +5,10 @@ import urllib
 from .forms import LPForm
 from .solver import pulp_solve
 
-#app = Flask(__name__)
 
 @app.route('/', methods=["GET","POST"])
 def index():
     form = LPForm()
-#    csrf.generate_csrf()
     if form.validate_on_submit():
        minimize = (form.minimize.data == 'minimize')
        obj_func = form.objective.data

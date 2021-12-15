@@ -31,14 +31,6 @@ def pulp_solve(minimize: bool, objective_function: str, constraints: list):
     
     # Define the model
     model = LpProblem(name="problem",sense=LpMinimize if minimize else LpMaximize)
-    """
-    if('min' in problem_string or 'Min' in problem_string):
-        model = LpProblem(name="problem",sense=LpMinimize)
-    elif('max' in problem_string or 'Max' in problem_string):
-        model = LpProblem(name="problem",sense=LpMaximize)
-    else:
-        raise ValueError(message='Problem does not contain a Minimize or Maximize statement')
-    """
 
     # Add the objective function
     obj_func,model_vars = parse_expression(objective_function,{},constraint=False)

@@ -14,13 +14,19 @@ def parse_expression(expression: str, model_vars: dict, constraint: bool=True):
             var = model_vars.get(var.name)
         else:
             model_vars[var.name] = var
-        test= re.search(f'(-?)(\d*){var.name}',expression)
+        test= re.search(f'(-?)\s*(\d*){var.name}',expression)
         constant = 1
         if(test.group(2) != ''):
             constant = int(test.group(2))
         if(test.group(1) != ''):
             constant *= -1
         expr += operator.mul(constant,var)
+    # Parse for constants
+    constant_regex = re.compile(r'[^a-zA-Z_](-?\d+)[^a-zA-Z].*=')
+    constant_list = constant_regex.findall(expression)
+    for constant in constant_list:
+        expr += int(constant)
+
     # Get constraining
     if constraint:
         expr_regex = re.compile(r'([><=])(=?)\s*(-?)(\d+)')
@@ -40,8 +46,10 @@ def parse_expression(expression: str, model_vars: dict, constraint: bool=True):
 
 
 
-#print(parse_expression('2x + y <= 20'))
-#print(parse_expression('-4x+5y >=10'))
-#print(parse_expression('-x + 2y >= -2'))
-#print(parse_expression('-x + 5y = 15'))
+#print(parse_expression('2x + y -50<= 20',{}))
+#print(parse_expression('-4x+5y >=10',{}))
+#print(parse_expression('-x - 2y >= -2',{}))
+#print(parse_expression('-x + 5y = 15',{}))
+#print(parse_expression('-x + 5y + 50 = 15',{}))
+#print(parse_expression('-x + 5y -50 = 15',{}))
 #print(parse_expression('x+2y',constraint=False))
